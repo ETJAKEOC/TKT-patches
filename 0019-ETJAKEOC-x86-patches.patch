@@ -393,33 +393,6 @@ Signed-off-by: Arnd Bergmann <arnd@arndb.de>
  drivers/misc/mei/Kconfig        |  2 +-
  5 files changed, 18 insertions(+), 104 deletions(-)
 
-diff --git a/arch/x86/Makefile b/arch/x86/Makefile
-index 5af3172fd..8120085b0 100644
---- a/arch/x86/Makefile
-+++ b/arch/x86/Makefile
-@@ -178,20 +178,8 @@ else
- 	# Use -mskip-rax-setup if supported.
- 	KBUILD_CFLAGS += $(call cc-option,-mskip-rax-setup)
- 
--        # FIXME - should be integrated in Makefile.cpu (Makefile_32.cpu)
--        cflags-$(CONFIG_MK8)		+= -march=k8
--        cflags-$(CONFIG_MPSC)		+= -march=nocona
--        cflags-$(CONFIG_MCORE2)		+= -march=core2
--        cflags-$(CONFIG_MATOM)		+= -march=atom
--        cflags-$(CONFIG_GENERIC_CPU)	+= -march=x86-64 -mtune=generic
--        KBUILD_CFLAGS += $(cflags-y)
--
--        rustflags-$(CONFIG_MK8)		+= -Ctarget-cpu=k8
--        rustflags-$(CONFIG_MPSC)	+= -Ctarget-cpu=nocona
--        rustflags-$(CONFIG_MCORE2)	+= -Ctarget-cpu=core2
--        rustflags-$(CONFIG_MATOM)	+= -Ctarget-cpu=atom
--        rustflags-$(CONFIG_GENERIC_CPU)	+= -Ctarget-cpu=x86-64 -Ztune-cpu=generic
--        KBUILD_RUSTFLAGS += $(rustflags-y)
-+        KBUILD_CFLAGS += -march=x86-64 -mtune=generic
-+        KBUILD_RUSTFLAGS += -Ctarget-cpu=x86-64 -Ztune-cpu=generic
- 
-         KBUILD_CFLAGS += -mno-red-zone
-         KBUILD_CFLAGS += -mcmodel=kernel
 diff --git a/arch/x86/Makefile_32.cpu b/arch/x86/Makefile_32.cpu
 index 94834c4b5..af7de9a42 100644
 --- a/arch/x86/Makefile_32.cpu
